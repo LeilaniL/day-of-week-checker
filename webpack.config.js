@@ -1,8 +1,7 @@
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: './src/main.js',
@@ -18,7 +17,7 @@ module.exports = {
         new UglifyJsPlugin({ sourceMap: true }),
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-            title: 'Ping Pong',
+            title: 'Date Checker',
             template: './src/index.html',
             inject: 'body'
         })
@@ -33,9 +32,8 @@ module.exports = {
                 ]
             },
             {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: "eslint-loader"
+                test: /\.(png|jpg)$/,
+                loader: 'url-loader'
             },
             {
                 test: /\.js$/,
@@ -43,10 +41,7 @@ module.exports = {
                     /node_modules/,
                     /spec/
                 ],
-                loader: "babel-loader",
-                options: {
-                    presets: ['es2015']
-                }
+                loader: "eslint-loader"
             }
         ]
     }
